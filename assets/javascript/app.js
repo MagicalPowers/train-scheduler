@@ -23,12 +23,13 @@ firebase.initializeApp(firebaseConfig);
 $("#submit-info").on("click", function (event) {
   event.preventDefault();
   //gotta retrieve the information from the hardcoded input form. the jquery way.
-  var name = $("").val().trim();
-  var destination = $("").val().trim();
+  var name = $("#trainName").val().trim();
+  var destination = $("#trainDestination").val().trim();
   //this one, i should use moment,js to format the time. i suppose it isnt strictly necessary but would be a good thing
-  var time = $("").val().trim();
-  var timing = $("").val().trim();
-  var train = {};
+  var time = $("beginTime").val().trim();
+  var timing = $("frequencyOf").val().trim();
+  //right, i need to hardcode some object attribute names
+  var train = {name: name, destination: destination, time: time, timing: timing};
   console.log(name);
   console.log(destination);
   console.log(time);
@@ -39,11 +40,11 @@ $("#submit-info").on("click", function (event) {
   //gosh, i hope this syntax is memorable
   //doesnt make sense to leave the text in the textboxes
   function clear() {
-    $("").val("");
-    $("").val("");
-    $("").val("");
-    $("").val("");
-    $("").val("");
+    $("#trainName").val("");
+    $("#trainDestination").val("");
+    $("#beginTime").val("");
+    $("frequencyOf").val("");
+    //$("").val("");
   }
   clear();
   
