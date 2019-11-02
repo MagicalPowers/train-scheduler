@@ -20,17 +20,56 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 //submit function
-$("#submit-info").on("click",  function(event) {
+$("#submit-info").on("click", function (event) {
   event.preventDefault();
-
-
+  //gotta retrieve the information from the hardcoded input form. the jquery way.
+  var name = $("").val().trim();
+  var destination = $("").val().trim();
+  //this one, i should use moment,js to format the time. i suppose it isnt strictly necessary but would be a good thing
+  var time = $("").val().trim();
+  var timing = $("").val().trim();
+  var train = {};
+  console.log(name);
+  console.log(destination);
+  console.log(time);
+  console.log(timing);
+  console.log(train);
+  //gootta push this to the database
+  database.ref().push(train);
+  //gosh, i hope this syntax is memorable
+  //doesnt make sense to leave the text in the textboxes
+  function clear() {
+    $("").val("");
+    $("").val("");
+    $("").val("");
+    $("").val("");
+    $("").val("");
+  }
+  clear();
+  
 });
 //results function
-function resultsFunction() {
+//this whole function i think should be a database on added, on child added thing
+//function resultsFunction() {
+database.ref().on("child_added", function(results) {  
+  
+  var name = results.val().name;
+  var destination = results.val().destination;
+  var time = results.val().time;
+  var timing = results.val().timing;
+  var next = "math";
+  var away = "math";
+  var newTrain = $("<tr>").append($("<td>").text(name), 
+  $("<td>").text(destination), 
+  $("<td>").text(timing), 
+  $("<td>").text(next), 
+  $("<td>").text(away));
+  //frankly this next line i dont fully understand
+  $("#soma > tbody").append(newTrain);
 
-}
+});
 //math functions
-function mathFunction1() {
+//you know what i will do this in the other function. function mathFunction1() {
 
-}
+
 //gotta remember to call a function?
